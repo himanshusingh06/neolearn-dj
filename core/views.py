@@ -134,30 +134,23 @@ def logout(request):
     auth.logout(request)
     return redirect('home')
 
+from IPython.display import display
+from IPython.display import Markdown
+import textwrap
 
 
-# Set up the Gemini API key
-gemini.configure(api_key='AIzaSyDkS1WQkQaqgUOA-NoY2YbRbEX4c16_Ads')
+import markdown2
 
-# Create the model configuration
-generation_config = {
-    "temperature": 1,
-    "top_p": 0.95,
-    "top_k": 40,
-    "max_output_tokens": 8192,
-    "response_mime_type": "text/plain",
-}
-
-# Initialize the generative model
-model = gemini.GenerativeModel(
-    model_name="gemini-1.5-pro",
-    generation_config=generation_config,
-    system_instruction=(
-        "You are a personalized learning assistant. Provide users with comprehensive study materials, "
-        "documentation, and video lectures to help them learn and improve their skills."
-    ),
-)
-
+def to_markdown(text):
+    """Convert markdown-style text to HTML."""
+    # Replace bullet points and other formatting if necessary
+    text = text.replace('•', '*')  # Replace bullets if needed
+    # Convert to HTML
+    return markdown2.markdown(text)
+GOOGLE_API_KEY = 'AIzaSyDkS1WQkQaqgUOA-NoY2YbRbEX4c16_Ads'
+from langchain_google_genai import ChatGoogleGenerativeAI
+llm = ChatGoogleGenerativeAI(model="gemini-pro",google_api_key=GOOGLE_API_KEY)
+     
 @login_required(login_url='login')
 def profile_view(request):
     courses = UserDefinedCourse.objects.filter(user=request.user)
@@ -170,12 +163,12 @@ def profile_view(request):
         resources = "No resources available yet."
         try:
             # Start a new chat session for this request
-            chat_session = model.start_chat(history=[])
-            response = chat_session.send_message(
-                f"Provide detailed resources, study materials, and video lectures for the course '{course_name}' "
-                f"with the following details: {details}."
-            )
-            resources = response.text
+            # chat_session = model.start_chat(history=[])
+            result =llm.invoke(f"Provide detailed resources, study materials, and video lectures for the course '{course_name}' "
+                f"with the following details: {details}.")
+            resources=to_markdown(result.content)
+            print(result)
+            print(resources)
         except Exception as e:
             resources = f"Error fetching resources: {str(e)}"
 
