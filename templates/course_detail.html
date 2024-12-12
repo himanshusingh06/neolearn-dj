@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-purple-700 via-indigo-700 to-purple-700 text-white font-sans">
+    <header class="bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-extrabold text-white">Neolearn</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="{% url 'home' %}" class="text-gray-200 hover:text-white">Home</a></li>
+                    <li><a href="{% url 'home' %}" class="text-gray-200 hover:text-white">Features</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'profile' %}" class="text-gray-200 hover:text-white">profile</a></li>
+                    <li><a href="{% url 'logout' %}" class="text-gray-200 hover:text-white">Logout</a></li>
+                    {% else %}
+                    <a href="{% url 'register' %}" class="hover:underline block">Signup</a>
+                    <li><a href="{% url 'login' %}" class="hover:underline block">Login</a></li>
+
+
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container mx-auto py-8">
+        <!-- Header -->
+        <h1 class="text-4xl font-bold text-center text-white">Course Details</h1>
+
+        <!-- User Info Section -->
+        <div class="mt-8 bg-gray-900 shadow-lg rounded-lg p-6">
+            <h2 class="text-2xl font-semibold text-gray-200">User Information</h2>
+            <p class="text-gray-100 mt-2"><strong>Name:</strong> {{ user.get_full_name }}</p>
+            <p class="text-gray-100 mt-2"><strong>Email:</strong> {{ user.email }}</p>
+        </div>
+
+        <!-- Course Info Section -->
+        <div class="mt-8 bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-2xl font-semibold text-gray-800">Course Information</h2>
+            <p class="text-gray-700 mt-2"><strong>Course Name:</strong> {{ course.course_name }}</p>
+            <p class="text-gray-700 mt-2"><strong>Details:</strong> {{ course.details }}</p>
+            <p class="text-gray-700 mt-2"><strong>Resources:</strong> {{ course.resources }}</p>
+        </div>
+
+        <!-- Back Button -->
+        <div class="mt-6">
+            <a href="{% url 'profile' %}"
+               class="bg-indigo-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-indigo-600 transition duration-300">
+                Back to Profile
+            </a>
+        </div>
+    </div>
+    <footer class="bg-gray-800 text-gray-400">
+        <div class="container mx-auto px-4 py-6 text-center">
+          <p>&copy; 2024 Neolearn. All rights reserved.</p>
+        </div>
+      </footer>
+</body>
+</html>

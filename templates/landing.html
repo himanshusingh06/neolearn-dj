@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neolearn Landing Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans">
+
+  <!-- Navbar -->
+  <header class="bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-extrabold text-white">Neolearn</h1>
+      <nav>
+        <ul class="flex space-x-6">
+          <li><a href="#" class="text-gray-200 hover:text-white">Home</a></li>
+          <li><a href="#features" class="text-gray-200 hover:text-white">Features</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'profile' %}" class="text-gray-200 hover:text-white">profile</a></li>
+          <li><a href="{% url 'logout' %}" class="text-gray-200 hover:text-white">Logout</a></li>
+          {% else %}
+            <a href="{% url 'register' %}" class="hover:underline block">Signup</a>
+            <li><a href="{% url 'login' %}" class="hover:underline block">Login</a></li>
+
+
+      {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-purple-700 via-indigo-700 to-purple-700 text-white">
+    <div class="container mx-auto px-4 py-24 text-center">
+      <h2 class="text-5xl font-bold mb-6">Learn Smarter, Dream Bigger</h2>
+      <p class="text-lg mb-8">Personalized AI-powered learning, tailored for you.</p>
+      <a href="#features" class="bg-white text-indigo-700 px-8 py-3 rounded-full shadow-lg hover:bg-gray-100 transition transform hover:scale-105">
+        Explore Features
+      </a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="container mx-auto px-4 py-20">
+    <div class="text-center mb-12">
+      <h3 class="text-4xl font-bold text-gradient bg-gradient-to-r from-indigo-500 to-purple-500">
+        Features
+      </h3>
+      <p class="text-gray-400 mt-2">Discover what makes Neolearn unique</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Feature 1 -->
+      <div class="bg-gray-800 p-8 rounded-lg shadow-lg hover:shadow-2xl transition transform hover:scale-105">
+        <div class="text-purple-400 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A2 2 0 013 15.382V6a2 2 0 011.553-1.947L9 3m6 17l5.447-2.724A2 2 0 0021 15.382V6a2 2 0 00-1.553-1.947L15 3M9 3v17m6-17v17" />
+          </svg>
+        </div>
+        <h4 class="text-2xl font-bold text-white mb-2">AI-Powered Content</h4>
+        <p class="text-gray-400">Tailored learning materials to suit your individual needs.</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="bg-gray-800 p-8 rounded-lg shadow-lg hover:shadow-2xl transition transform hover:scale-105">
+        <div class="text-purple-400 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h11M9 21H4a1 1 0 01-1-1v-8a1 1 0 011-1h5l3-3m0 0l4 4m-4-4V4m0 12v4" />
+          </svg>
+        </div>
+        <h4 class="text-2xl font-bold text-white mb-2">Interactive Modules</h4>
+        <p class="text-gray-400">Engage with hands-on modules designed to enhance understanding.</p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="bg-gray-800 p-8 rounded-lg shadow-lg hover:shadow-2xl transition transform hover:scale-105">
+        <div class="text-purple-400 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <h4 class="text-2xl font-bold text-white mb-2">Progress Tracking</h4>
+        <p class="text-gray-400">Monitor your learning with real-time analytics and feedback.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="bg-gradient-to-r from-purple-700 via-indigo-700 to-purple-700 text-white">
+    <div class="container mx-auto px-4 py-20 text-center">
+      <h3 class="text-3xl font-bold mb-4">Ready to Start Your Journey?</h3>
+      <p class="text-lg mb-8">Join Neolearn today and achieve your learning goals.</p>
+      <a href="#" class="bg-white text-indigo-700 px-8 py-3 rounded-full shadow-lg hover:bg-gray-100 transition transform hover:scale-105">
+        Get Started
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-gray-400">
+    <div class="container mx-auto px-4 py-6 text-center">
+      <p>&copy; 2024 Neolearn. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
